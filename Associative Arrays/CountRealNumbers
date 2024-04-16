@@ -1,0 +1,36 @@
+//Read a list of integers and print them in ascending order, along with their number of occurrences.
+  
+//    Input: 8 2 2 8 2
+//    Output: 2-> 3
+//            8-> 2
+
+namespace CountRealNumbers
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] numbers = Console.ReadLine()
+                 .Split(' ')
+                 .Select(int.Parse)
+                 .ToArray();
+            SortedDictionary<int, int> numberOccurrences = new SortedDictionary<int, int>();
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                if (!numberOccurrences.ContainsKey(numbers[i]))
+                {
+                    numberOccurrences[numbers[i]] = 1;
+                }
+                else
+                {
+                    numberOccurrences[numbers[i]]++;
+                }
+            }
+            foreach (KeyValuePair<int, int> kvp in numberOccurrences)
+            {
+                Console.WriteLine($"{kvp.Key} -> {kvp.Value}");
+            }
+        }
+    }
+}
