@@ -1,0 +1,100 @@
+// The first input line will hold a list of integers. Until we receive the "End" command, we will be given operations we have to apply to the list.
+// The possible commands are:
+// •	Add {number} – add the given number to the end of the list
+// •	Insert {number} { index} – insert the number at the given index
+// •	Remove {index} – remove the number at the given index
+// •	Shift left {count} – first number becomes last. This has to be repeated the specified number of times
+// •	Shift right {count} – last number becomes first. To be repeated the specified number of times
+// Note: the index given may be outside of the bounds of the array. In that case print: "Invalid index".
+ 
+//     Input:
+// 1 23 29 18 43 21 20
+// Add 5
+// Remove 5
+// Shift left 3
+// Shift left 1
+// End
+
+//     Output:
+// 43 20 5 1 23 29 18
+
+
+namespace ListOperations
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+          List<int> numbers = Console.ReadLine()
+               .Split(" ")
+               .Select(int.Parse)
+               .ToList();
+            string command = default;
+
+            while ((command = Console.ReadLine()) != "End") 
+            { 
+                List <string> commands = command.Split(" ").ToList();
+
+                if (commands[0] == "Add")
+                {
+                    numbers.Add(int.Parse(commands[1]));
+                }
+                else if (commands[0] == "Remove")
+                {
+                    if (int.Parse(commands[1]) >= numbers.Count  || int.Parse(commands[1]) < 0)
+                    {
+                        Console.WriteLine("Invalid index");
+                    }
+                    else
+                    {
+                        numbers.RemoveAt(int.Parse(commands[1]));
+                    }
+                }
+                else if (commands[0] == "Insert")
+                {
+                    if (int.Parse(commands[2]) >= numbers.Count  || int.Parse(commands[2]) < 0)
+                    {
+                        Console.WriteLine("Invalid index");
+                    }
+                    else
+                    {
+                        int number = int.Parse(commands[1]);
+                        int index = int.Parse(commands[2]);
+                        numbers.Insert(index, number);
+                    }
+                }
+                else if (commands[1] == "left")
+                {
+                    if (int.Parse(commands[2]) > 0)
+                    {
+                        for (int i = 0; i < int.Parse(commands[2]); i++)
+                        {
+                            numbers.Add(numbers[0]);
+                            numbers.RemoveAt(0);
+                        }
+                    }
+             
+                }
+                else if (commands[1] == "right")
+                {
+                    if (int.Parse(commands[2]) > 0)
+                    {
+                        for (int i = 0; i < int.Parse(commands[2]); i++)
+                        {
+                            int number = numbers[numbers.Count - 1];
+                            int index = 0;
+                            numbers.RemoveAt(numbers.Count - 1);
+                            numbers.Insert(index, number);
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Index");
+                }
+                commands.Clear();
+            }
+            Console.WriteLine(string.Join(" ",numbers));
+        }
+    }
+}
