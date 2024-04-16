@@ -1,0 +1,36 @@
+// Create a program to find all the top integers in an array. A top integer is an integer that is greater than all the elements to its right.
+// Input: 14 24 3 19 15 17  Output:  24 19 17
+
+namespace TopIntegers
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            {
+                int[] numbers = Console.ReadLine()
+                               .Split(' ')
+                               .Select(int.Parse)
+                               .ToArray();
+                for (int j = 0; j < numbers.Length - 1; j++)
+
+                {
+                    int number = numbers[j];
+                    for (int i = j + 1; i < numbers.Length; i++)
+                    {
+                        int secondnumber = numbers[i];
+                        if (number <= secondnumber)
+                        {
+                            break;
+                        }
+                        else if (i == numbers.Length - 1)
+                        {
+                            Console.Write(number + " ");
+                        }
+                    }
+                }
+                Console.WriteLine(numbers[numbers.Length - 1]);
+            }
+        }
+    }
+}
