@@ -1,0 +1,66 @@
+// Change the program from the "Article" problem in such a way, that you will be able to store a list of articles. 
+// You will not need to use the previous methods anymore (except the "ToString()"). On the first line, you will receive the number of articles.
+// On the next lines, you will receive the articles in the same format as in the previous problem: "{title}, {content}, {author}".Print the articles. 
+
+//     Input:
+// 2
+// Science, planets, Bill
+// Article, content, Johnny
+// Output:
+// Science - planets: Bill
+// Article - content: Johnny
+
+
+namespace Article
+{
+    class Article
+    {
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public string Autor { get; set; } 
+
+        public void Edit (string newContent)
+        {
+            Content = newContent;
+        }
+
+        public void ChangeAuthor (string newAutor)
+        {
+            Autor = newAutor;
+        }
+
+        public void Rename (string newTitle)
+        {
+            Title = newTitle;
+        }
+
+        public override string ToString()
+        {
+            return $"{Title} - {Content}: {Autor}";
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int count = int.Parse(Console.ReadLine());
+            List <Article> list = new List<Article>();
+
+            for (int i = 0; i < count; i++)
+            {
+                string[] inpit = Console.ReadLine().Split(", ").ToArray();
+
+                Article article = new Article();
+                article.Title = inpit[0];
+                article.Content = inpit[1];
+                article.Autor = inpit[2];
+                
+                list.Add(article);
+            }
+            foreach (Article article in list)
+            {
+                Console.WriteLine(article);
+            }
+        }
+    }
+}
