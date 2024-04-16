@@ -1,0 +1,65 @@
+// Define a class called Student, which will hold the following information about some students: 
+// •	first name
+// •	last name
+// •	age
+// •	home town
+// Input / Constraints
+// Read information about some students, until you receive the "end" command. After that, you will receive a city name.
+// Output
+// Print the students who are from the given city in the following format: "{firstName} {lastName} is {age} years old."
+
+//     Examples:
+// Input:
+// John Smith 15 Sofia
+// Peter Ivanov 14 Plovdiv
+// Linda Bridge 16 Sofia
+// Simon Stone 12 Varna
+// end
+// Sofia
+
+// Output:
+// John Smith is 15 years old.
+// Linda Bridge is 16 years old.
+
+
+
+namespace Students
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string command =  default;
+            List <Student> students = new List <Student> ();
+
+            while((command = Console.ReadLine()) != "end")
+            {
+                string[] studentsInfo = command.Split(' ').ToArray();
+                    Student currentStudent = new Student 
+                    {
+                        FirstName = studentsInfo[0],
+                        LastName = studentsInfo[1],
+                        Age = int.Parse(studentsInfo[2]),
+                        HomeTown = studentsInfo[3]
+                    };
+                    students.Add(currentStudent);
+            }
+            string filter = Console.ReadLine(); 
+            foreach (Student student in students)
+            {
+                if (student.HomeTown == filter)
+                {
+                    Console.WriteLine($"{student.FirstName} {student.LastName} is {student.Age} years old.");
+                }
+            }
+        }
+    }
+
+    public class Student
+    {
+        public  string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int Age { get; set; }
+        public string HomeTown { get; set; }
+    }
+}
