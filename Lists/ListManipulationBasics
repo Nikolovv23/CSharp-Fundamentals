@@ -1,0 +1,54 @@
+// Create a program that reads a list of integers. Then until you receive "end", you will receive different commands:
+// •	Add {number}: add a number to the end of the list.
+// •	Remove {number}: remove a number from the list.
+// •	RemoveAt {index}: remove a number at a given index.
+// •	Insert {number} { index}: insert a number at a given index.
+// Note: All the indices will be valid!
+// When you receive the "end" command, print the final state of the list (separated by spaces).
+ 
+// Input:                   Output:
+// 4 19 2 53 6 43           4 53 6 8 43 3
+// Add 3
+// Remove 2
+// RemoveAt 1
+// Insert 8 3
+// end	
+
+
+namespace ListManipulationBasics
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List <int> numbers = Console.ReadLine().Split().Select(int.Parse).ToList();
+            string line = default;
+
+            while ((line = Console.ReadLine())  != "end" )
+            {
+                string[] lineTokens = line.Split().ToArray();
+                string command = lineTokens[0];
+
+                if (command == "Add")
+                {
+                    numbers.Add (int.Parse(lineTokens[1]));
+                }
+                else if (command == "Insert")
+                {
+                    int number = int.Parse(lineTokens[1]);
+                    int index = int.Parse(lineTokens[2]);
+                    numbers.Insert (index, number);
+                }
+                else if (command == "Remove")
+                {
+                    numbers.Remove(int.Parse(lineTokens[1]));
+                }
+                else //RemoveAt 
+                {
+                    numbers.RemoveAt(int.Parse(lineTokens[1]));
+                }
+            }
+            Console.WriteLine(string.Join(" ", numbers));
+        }
+    }
+}
