@@ -1,0 +1,33 @@
+// Create a program to read an array of integers and condense them by summing all adjacent couples of elements until a single integer remains.
+// For example, let us say we have 3 elements - {2, 10, 3}. We sum the first two and the second two elements and get {2 + 10, 10 + 3} = {12, 13},
+// then we sum all adjacent elements again. This results in {12 + 13} = {25}.
+
+
+namespace CondenseArrayToNumber
+{
+    class Program
+    {
+        static void Main()
+        {
+
+            int[] mainMasiv = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            int[] condensedMasiv = new int[mainMasiv.Length - 1];
+
+            if (mainMasiv.Length == 1)
+            {
+                Console.WriteLine(mainMasiv[0]);
+                return;
+            }
+
+            for (int i = 0; i < mainMasiv.Length; i++)
+            {
+                for (int j = 0; j < condensedMasiv.Length - i; j++)
+                {
+                    condensedMasiv[j] = mainMasiv[j] + mainMasiv[j + 1];
+                }
+                mainMasiv = condensedMasiv;
+            }
+            Console.WriteLine(condensedMasiv[0]);
+        }
+    }
+}
