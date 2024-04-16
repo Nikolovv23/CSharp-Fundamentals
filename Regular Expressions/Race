@@ -1,0 +1,89 @@
+// Write a program that processes information about a race. On the first line, you will be given a list of participants separated by ", ".
+// On the next few lines, until you receive a line "end of race", you will be given some info which will be some alphanumeric characters.
+// In between them, you could have some extra characters which you should ignore. For example: "G!32e%o7r#32g$235@!2e".
+// The letters are the name of the person and the sum of the digits is the distance he ran. So here we have George who ran 29 km.
+// Store the information about the person only if the list of racers contains the name of the person. If you receive the same person more than once,
+// just add the distance to his old distance. At the end print the top 3 racers in the format:
+// "1st place: {first racer}
+// 2nd place: { second racer}
+// 3rd place: { third racer}"
+
+//     Input:
+// George, Peter, Bill, Tom
+// G4e@55or%6g6!68e!!@
+// R1@!3a$y4456@
+// B5@i@#123ll
+// G@e54o$r6ge#
+// 7P%et^#e5346r
+// T$o553m&6
+// end of race
+//     Output:
+// 1st place: George
+// 2nd place: Peter
+// 3rd place: Tom
+
+
+namespace Race
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> names = Console.ReadLine().Split(", ").ToList();
+            List<Participant> participants = new List<Participant>();
+
+            foreach (string element in names)
+            {
+                participants.Add(new Participant(element));
+            }
+
+            string input;
+            while ((input = Console.ReadLine()) != "end of race")
+            {
+                StringBuilder nameBuilder = new StringBuilder();
+
+                string lettersPattern = @"[A-Za-z]";
+                foreach (Match match in Regex.Matches(input, lettersPattern))
+                {
+                    nameBuilder.Append(match.Value);
+                }
+
+                string participantName = nameBuilder.ToString();
+
+                int distance = 0;
+                string digitPattern = @"[0-9]";
+                foreach (Match match in Regex.Matches(input, digitPattern))
+                {
+                    distance += int.Parse(match.Value);
+                }
+
+                Participant foundParticipant = participants
+               .FirstOrDefault(p => p.Name == participantName);
+
+                if (foundParticipant != null)
+                {
+                    foundParticipant.Distance += distance;
+                }
+             
+            }
+           List<Participant> firstThreeParticipants = participants
+                .OrderByDescending(p => p.Distance)
+                .Take(3)
+                .ToList();
+
+            Console.WriteLine($"1st place: {firstThreeParticipants[0].Name}");
+            Console.WriteLine($"2nd place: {firstThreeParticipants[1].Name}");
+            Console.WriteLine($"3rd place: {firstThreeParticipants[2].Name}");
+        }
+    }
+    class Participant
+    {
+        public string Name { get; set; }
+        public decimal Distance { get; set; }
+
+        public Participant (string name)
+        {
+            Name = name;
+        }  
+    }
+}
