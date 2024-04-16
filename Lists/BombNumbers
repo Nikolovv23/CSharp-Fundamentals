@@ -1,0 +1,46 @@
+// Create a program that reads a sequence of numbers and a special bomb number holding a certain power. Your task is to detonate every occurrence of the special bomb number
+// and according to its power the numbers to its left and right. The bomb power refers to how many numbers to the left and right will be removed, no matter their values.
+// Detonations are performed from left to right and all the detonated numbers disappear. Finally, print the sum of the remaining elements in the sequence.
+
+//     Input:
+// 1 2 2 4 2 2 2 9
+// 4 2
+//     Output:
+// 12
+//     Comments:
+// The special number is 4 with power 2. After detonation, we are left with the sequence [1, 2, 9] with sum 12.
+
+
+namespace BombNumbers
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> numbers = Console.ReadLine().Split().Select(int.Parse).ToList();
+            List<int> bombAndPower = Console.ReadLine().Split().Select(int.Parse).ToList();
+
+            for (int i = 0; i < numbers.Count; i++)
+            {
+                if (numbers[i] == bombAndPower[0])
+                {
+                    int deleteFromFirstNumber = i - bombAndPower[1];
+                    if (deleteFromFirstNumber < 0)
+                    {
+                        deleteFromFirstNumber = 0;
+                    }
+                    int deleteToLastNumber = i + bombAndPower[1];
+                    if (deleteToLastNumber > numbers.Count)
+                    {
+                        deleteToLastNumber = numbers.Count;
+                    }
+                    for (int j = deleteFromFirstNumber; j <= deleteToLastNumber; j++)
+                    {
+                        numbers[j] = 0;
+                    }
+                }
+            }
+            Console.WriteLine(numbers.Sum());
+        }
+    }
+}
