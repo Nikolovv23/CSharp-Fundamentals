@@ -1,0 +1,29 @@
+// Create a method that receives two parameters:
+// •	A string 
+// •	A number n (integer) represents how many times the string will be repeated
+//  The method should return a new string, containing the initial one, repeated n times without space. 
+
+
+namespace RepeatString
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+          string text = Console.ReadLine();
+          int n = int.Parse(Console.ReadLine());
+           
+            string result = RepeatText(text, n);
+            Console.WriteLine(result);
+        }
+        static string RepeatText (string text, int r)
+        {
+            string newText = "";
+            for (int i = 0; i < r; i++)
+            {
+                newText += text;
+            }
+            return newText;
+        }
+    }
+}
