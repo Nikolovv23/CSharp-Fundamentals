@@ -1,0 +1,47 @@
+// Create a program that creates 2 arrays. You will be given an integer n. On the next n lines, you will get 2 integers. 
+// Form 2 new arrays in a zig-zag pattern as shown below.
+
+//     input: 4             output: 1 10 31 20
+//            1 5                   5 9 81 41
+//            9 10
+//            31 81
+//            41 20
+
+
+namespace ZigZagArrays
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int number = int.Parse(Console.ReadLine());
+
+            string[] firstArr = new string[number];
+            string[] secondArr = new string[number];
+
+            bool position = true;
+            
+
+            for (int i = 0; i < number; i++)
+            {
+                string integer = Console.ReadLine();
+                string[] numbersaArray = integer
+                                        .Split(' ');
+                if (position == true)
+                {
+                    firstArr[i] = numbersaArray[0];
+                    secondArr[i] = numbersaArray[1];
+                    position = false;
+                }
+                else
+                {
+                    firstArr[i] = numbersaArray[1];
+                    secondArr[i] = numbersaArray[0];
+                    position = true;
+                }
+            }
+            Console.WriteLine(string.Join(" ",firstArr));
+            Console.WriteLine(string.Join(" ",secondArr));
+        }
+    }   
+}
