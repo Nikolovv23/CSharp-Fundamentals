@@ -1,0 +1,35 @@
+// Create a program that counts all characters in a string, except for space (' '). 
+// Print all the occurrences in the following format:
+// "{char} -> {occurrences}"
+
+
+namespace CountCharsInAString
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] words = Console.ReadLine().Split(' ').ToArray();
+            var dictionary = new Dictionary<char, int>();
+
+            foreach (string word in words)
+            {
+                foreach (char ch in word)
+                {
+                    if (!dictionary.ContainsKey(ch))
+                    {
+                        dictionary[ch] = 1;
+                    }
+                    else
+                    {
+                        dictionary[ch]++;
+                    }
+                }
+            }
+            foreach (KeyValuePair<char,int> kvp in dictionary)
+            {
+                Console.WriteLine($"{kvp.Key} -> {kvp.Value}");
+            }
+        }   
+    }
+}
