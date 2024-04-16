@@ -26,17 +26,17 @@ namespace SignOfIntegerNumbers
             }
         }
 
-        private static void Zero(double number)
+        static void Zero(double number)
         {
                 Console.WriteLine($"The number {number} is zero.");
         }
 
-        private static void Negative(double number)
+        static void Negative(double number)
         {
             Console.WriteLine($"The number {number} is negative.");
         }
 
-        private static void Positive(double number)
+        static void Positive(double number)
         {
             Console.WriteLine($"The number {number} is positive.");
         }
