@@ -1,4 +1,7 @@
 // Create a method that prints out the smallest of three integer numbers.
+// Input: 2
+//        5
+//        3
 
 namespace SmallestOfThreeNumbers
 {
