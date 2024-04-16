@@ -1,0 +1,22 @@
+// Create a program that reads an array of strings. Each string is repeated N times, where N is the length of the string. Print the concatenated string.
+
+namespace RepeatStrings
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] strings = Console.ReadLine().Split(" ").ToArray();
+
+            for (int i = 0; i < strings.Length; i++)
+            {
+                string word = strings[i];
+
+                for (int j = 0; j < word.Length; j++)
+                {
+                    Console.Write(word);
+                }
+            }
+        }
+    }
+}
