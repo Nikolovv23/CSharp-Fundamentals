@@ -1,0 +1,35 @@
+// Create a program that calculates and prints the total price of an order. The method should receive two parameters:
+// •	A string, representing a product - "coffee",  "water", "coke", "snacks"
+// •	An integer, representing the quantity of the product
+// The prices for a single item of each product are:
+// •	coffee – 1.50
+// •	water – 1.00
+// •	coke – 1.40
+// •	snacks – 2.00
+// Print the result, rounded to the second decimal place.
+
+
+namespace Orders
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string product = Console.ReadLine();
+            int quantity = int.Parse(Console.ReadLine());
+            Console.WriteLine($"{Price(product) * quantity:f2}");
+        }
+        static double Price (string product)
+        {
+            double price = 0; 
+            switch (product)
+            {
+                case "coffee": price = 1.50; break;
+                case "water": price = 1.00;break;
+                case "coke": price = 1.40;break;
+                case "snacks": price = 2.00; break;
+            }
+            return price;
+        }
+    }
+}
