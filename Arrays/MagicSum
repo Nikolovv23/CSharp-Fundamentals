@@ -1,0 +1,33 @@
+// Create a program, which prints all unique pairs in an array of integers whose sum is equal to a given number.
+// Input : 1 7 6 2 19 23        Output: 1 7
+//         8                            6 2
+
+namespace MagicSum
+{ 
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] numbers = Console.ReadLine()
+                           .Split(' ')
+                           .Select(int.Parse)
+                           .ToArray();
+            int numbersSum = int.Parse(Console.ReadLine());
+            for (int j = 0; j < numbers.Length; j++)
+            {
+                int number = numbers[j];
+
+                for (int i = j + 1; i < numbers.Length; i++)
+                {
+                    int secondNumber = numbers[i];
+
+                    if (number + secondNumber == numbersSum)
+                    {
+                        Console.WriteLine(number + " " + secondNumber);
+                    }
+
+                }
+            }
+        }
+    }
+}
