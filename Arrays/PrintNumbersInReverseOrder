@@ -1,0 +1,23 @@
+// Read n numbers and print them in reverse order, separated by a single space.
+
+namespace PrintNumbersInReverseOrder
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int count = int.Parse(Console.ReadLine());
+            int[] ints = new int[count];
+            for (int i = count - 1 ; i >= 0 ; i--)
+            {
+                int number = int.Parse(Console.ReadLine());
+                ints[i] = number;
+                
+            }
+            for (int i = 0; i < ints.Length; i++)
+            {
+                Console.Write(ints[i] + " ");
+            }
+        }
+    }
+}
