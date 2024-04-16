@@ -1,0 +1,40 @@
+// Enter a number in range 1-7 and print out the word representing it or "Invalid day!". Use an array of strings.
+
+namespace DayOfWeek
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] dayOfWeek = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+
+            int day = int.Parse(Console.ReadLine());
+
+            if (day > 7 || day < 1)
+            {
+                Console.WriteLine("Invalid day!");
+            }
+            else
+            {
+                switch (day)
+                {
+                    case 1:
+                        Console.WriteLine(dayOfWeek[0]); break;
+                    case 2:
+                        Console.WriteLine(dayOfWeek[1]); break;
+                    case 3:
+                        Console.WriteLine(dayOfWeek[2]); break;
+                    case 4:
+                        Console.WriteLine(dayOfWeek[3]); break;
+                    case 5:
+                        Console.WriteLine(dayOfWeek[4]); break;
+                    case 6:
+                        Console.WriteLine(dayOfWeek[5]); break;
+                    case 7:
+                        Console.WriteLine(dayOfWeek[6]); break;
+                    default: break;
+                }
+            }
+        }
+    }
+}
