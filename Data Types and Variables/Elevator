@@ -1,0 +1,17 @@
+// Calculate how many courses will be needed to elevate n persons by using an elevator of the capacity of p persons. 
+// The input holds two lines: the number of people n and the capacity p of the elevator.
+
+using System;
+namespace Elevator
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            double persons = double.Parse(Console.ReadLine());
+            double elevatorCapasity = double.Parse(Console.ReadLine());
+            double neededCourses = Math.Ceiling(persons / elevatorCapasity);
+            Console.WriteLine(neededCourses);
+        }
+    }
+}
