@@ -1,0 +1,127 @@
+// Until you receive the "End" command, you will be receiving lines of input in the following format:
+// "{typeOfVehicle} {model} {color} {horsepower}"
+// When you receive the "End" command, you will start receiving information about some vehicles.
+// For every vehicle, print out the information about it in the following format:
+// "Type: {typeOfVehicle}
+// Model: { modelOfVehicle}
+// Color: { colorOfVehicle}
+// Horsepower: { horsepowerOfVehicle}"
+
+// When you receive the "Close the Catalogue" command, print out the average horsepower of the cars and the average horsepower of the trucks in the format:
+// "{typeOfVehicles} have average horsepower of: {averageHorsepower}."
+// The average horsepower is calculated by dividing the sum of the horsepower of all vehicles of the given type by the total count of all vehicles from that type. Format the answer to the second digit after the decimal point.
+
+//     Input:
+// truck Man red 200
+// truck Mercedes blue 300
+// car Ford green 120
+// car Ferrari red 550
+// car Lamborghini orange 570
+// End
+// Ferrari
+// Ford
+// Man
+// Close the Catalogue
+//     Output:
+// Type: Car
+// Model: Ferrari
+// Color: red
+// Horsepower: 550
+// Type: Car
+// Model: Ford
+// Color: green
+// Horsepower: 120
+// Type: Truck
+// Model: Man
+// Color: red
+// Horsepower: 200
+// Cars have average horsepower of: 413.33.
+// Trucks have average horsepower of: 250.00.
+
+
+
+namespace VehicleCatalogue2
+{
+    class Vehicle
+    {
+        public string Type { get; set; }
+        public string Model { get; set; }
+        public string Color { get; set; }
+        public int HorsePower { get; set; }
+
+        public override string ToString()
+        {
+            return $"Type: {(Type == "car" ? "Car" : "Truck")}\n" +
+                   $"Model: {Model}\n" +
+                   $"Color: {Color}\n" +
+                   $"Horsepower: {HorsePower}";
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string command;
+            List<Vehicle> list = new List<Vehicle>();
+
+            while ((command = Console.ReadLine()) != "End")
+            {
+                string[] information = command.Split(' ').ToArray();
+                Vehicle vehicle = new Vehicle();
+                vehicle.Type = information[0];
+                vehicle.Model = information[1];
+                vehicle.Color = information[2];
+                vehicle.HorsePower = int.Parse(information[3]);
+
+                list.Add(vehicle);
+            }
+
+            while ((command = Console.ReadLine()) != "Close the Catalogue")
+            {
+                foreach (Vehicle vehicle in list)
+                {
+                    if (vehicle.Model == command)
+                    {
+                        Console.WriteLine(vehicle);
+                    }
+                }
+            }
+
+            double carHorsePower = 0;
+            double carCount = 0;
+            double truckHorsePower = 0;
+            double truckCount = 0;
+            foreach (Vehicle vehicle in list)
+            {
+                switch (vehicle.Type)
+                {
+                    case "car":
+                        carCount++;
+                        carHorsePower += vehicle.HorsePower;
+                        break;
+                    case "truck":
+                        truckCount++;
+                        truckHorsePower += vehicle.HorsePower;
+                        break;
+                }
+            }
+            if (carCount <= 0)
+            {
+                Console.WriteLine($"Cars have average horsepower of: {0:f2}.");
+                Console.WriteLine($"Trucks have average horsepower of: {truckHorsePower / truckCount:f2}.");
+            }
+            else if (truckCount <= 0)
+            {
+                Console.WriteLine($"Cars have average horsepower of: {carHorsePower / carCount:f2}.");
+                Console.WriteLine($"Trucks have average horsepower of: {0:f2}.");
+            }
+            else
+            {
+                Console.WriteLine($"Cars have average horsepower of: {carHorsePower / carCount:f2}.");
+                Console.WriteLine($"Trucks have average horsepower of: {truckHorsePower / truckCount:f2}.");
+            }
+        }
+    }
+}
+
