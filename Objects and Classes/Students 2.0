@@ -1,0 +1,76 @@
+// Use the class from the "Students" problem. If you receive a student, which already exists (first name and last name should be unique) overwrite the information.
+
+// Input:
+// John Smith 15 Sofia
+// Peter Johnson 14 Plovdiv
+// Peter Johnson 25 Plovdiv
+// Linda Bridge 16 Sofia
+// Linda Bridge 27 Sofia
+// Simon Stone 12 Varna
+// end
+// Sofia
+ 
+// Output:
+// John Smith is 15 years old.
+// Linda Bridge is 27 years old.
+
+
+namespace Students
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string command =  default;
+            List <Student> students = new List <Student> ();
+            int countOfStudents = 0;
+            while ((command = Console.ReadLine()) != "end")
+            {
+                string[] studentsInfo = command.Split(' ').ToArray();
+
+                    string firstName = studentsInfo[0];
+                    string secondName = studentsInfo[1];
+                    int age = int.Parse(studentsInfo[2]);
+                    string homeTown = studentsInfo[3];
+
+                   Student currentStudent = new Student();
+                   currentStudent.FirstName = firstName;
+                   currentStudent.LastName = secondName;
+                   currentStudent.Age = age;
+                   currentStudent.HomeTown = homeTown;
+
+                students.Add (currentStudent);
+                
+                if (countOfStudents > 0)
+                {
+                    for (int t = 0; t <= students.Count - 2; t ++)
+                    {
+                        if (students[t].FirstName == currentStudent.FirstName && students[t].LastName == currentStudent.LastName)
+                        {
+                            students.Remove(students[t]);
+                        }
+                    }
+                }
+                countOfStudents++;
+            }
+
+            string filter = Console.ReadLine(); 
+
+            foreach (Student student in students)
+            {
+                if (student.HomeTown == filter)
+                {
+                    Console.WriteLine($"{student.FirstName} {student.LastName} is {student.Age} years old.");
+                }
+            }
+        }
+    }
+
+    public class Student
+    {
+        public  string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int Age { get; set; }
+        public string HomeTown { get; set; }
+    }
+}
