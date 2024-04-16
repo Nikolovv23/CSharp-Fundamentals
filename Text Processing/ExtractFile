@@ -1,0 +1,24 @@
+// Create a program that reads the path to a file and subtracts the file name and its extension.
+// Input: C:\Internal\training-internal\Template.pptx
+
+
+namespace ExtractFile
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string text = Console.ReadLine();
+            int index = text.LastIndexOf('\\');
+            text = text.Substring(index + 1);
+
+            string[] nameAndExtension= text.Split('.').ToArray();
+
+            string fileName = nameAndExtension[0];
+            string fileExtension = nameAndExtension[1];
+
+            Console.WriteLine("File name: " + fileName);
+            Console.WriteLine("File extension: " +  fileExtension);
+        }
+    }
+}
