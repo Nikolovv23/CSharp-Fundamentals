@@ -1,0 +1,29 @@
+// Create a program that calculates the difference between the sum of the even and the sum of the odd numbers in an array.
+
+namespace EvenAndOddSubtraction
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] number = Console.ReadLine()
+                         .Split(' ')
+                         .Select(int.Parse)
+                         .ToArray();
+            int sumOfEvenNumbers = 0;
+            int sumOfOddNumbers = 0;
+            for (int i = 0; i < number.Length; i++)
+            {
+                if(number[i] % 2 == 0)
+                {
+                    sumOfEvenNumbers += number[i];
+                }
+                else
+                {
+                    sumOfOddNumbers += number[i];
+                }
+            }
+            Console.WriteLine(sumOfEvenNumbers - sumOfOddNumbers);
+        }    
+    }
+}
