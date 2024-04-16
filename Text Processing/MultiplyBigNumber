@@ -1,0 +1,44 @@
+// You are given two lines – the first one can be a really big number (0 to 1050). The second one will be a single-digit number (0 to 9).
+// Your task is to display the product of these numbers.
+// Note: do not use the BigInteger class.
+// Input: 923847238931983192462832102
+//        4   
+
+
+namespace MultiplyBigNumber
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string firstNumber = Console.ReadLine();
+            string secondNumber =Console.ReadLine();
+            Console.WriteLine(MultiplyNumbers(firstNumber,secondNumber));
+        }
+        private static string MultiplyNumbers( string firstNumber, string secondNumber)
+        {
+            if (firstNumber == "0" || secondNumber == "0")
+            {
+                return "0";
+            }
+            int carry = 0;
+            int multiplier = int.Parse(secondNumber);
+
+            char[] resultChars = new char[firstNumber.Length + 1];
+
+            for (int i = firstNumber.Length - 1 ; i >= 0; i --)
+            {
+                int digit = int.Parse(firstNumber[i].ToString());
+                int product = digit * multiplier + carry;
+
+                resultChars[i + 1] = (char)(product % 10 + '0');
+                carry = product / 10;
+            }           
+            if (carry > 0)
+            {
+                resultChars[0] = (char)(carry + '0');
+            }
+            return new string(resultChars).TrimStart('\0');
+        }
+    }
+}
