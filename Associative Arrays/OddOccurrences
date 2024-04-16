@@ -1,0 +1,27 @@
+// Create a program that extracts all elements from a given sequence of words that are present in it an odd number of times (case-insensitive).
+// •	Words are given on a single line, space-separated.
+// •	Print the result elements in lowercase, in their order of appearance.
+
+// Input:
+// Java C# PHP PHP JAVA C java
+// Output:
+// java c# c
+
+
+namespace OddOccurrences
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+           Console.WriteLine(string.Join(' ',Console.ReadLine()
+                .Split()
+                .Select (x => x.ToLower())
+                .GroupBy(x => x)
+                .Where(x => x.Count() %2 == 1)
+                .SelectMany(x => x)
+                .Distinct()
+                .ToList()));
+        }   
+    }
+}
