@@ -1,0 +1,27 @@
+// A train has n number of wagons (integer, received as input). On the next n lines, you will receive the number of people that are going to get on each wagon.
+// Print out the number of passengers in each wagon followed by the total number of passengers on the train.
+
+// Input: 3
+//        13
+//        24
+//        8
+
+namespace Train
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int number = int.Parse(Console.ReadLine());
+            int sum = 0;
+            for (int i = 0; i < number; i++)
+            {
+                int passengers = int.Parse(Console.ReadLine());
+                sum += passengers;
+                Console.Write(passengers + " ");
+            }
+            Console.WriteLine();
+            Console.WriteLine(sum);
+        }
+    }
+}
