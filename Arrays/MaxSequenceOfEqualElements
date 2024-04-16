@@ -1,0 +1,53 @@
+// Create a program that finds the longest sequence of equal elements in an array of integers. If several equal sequences are present in the array,
+// print out the leftmost one.
+// Input: 2 1 1 2 3 3 2 2 2 1     Output: 2 2 2
+
+
+namespace MaxSequenceOfEqualElements
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            {
+                int[] numbers = Console.ReadLine()
+                               .Split(' ')
+                               .Select(int.Parse)
+                               .ToArray();
+
+                int countOfEqualElements = 0;
+                int biggestCountOfEqualElements = 0;
+                int equalElementsValue = 0;
+
+                for (int j = 0; j < numbers.Length; j++)
+                {
+                    int number = numbers[j];
+
+                    for (int i = j + 1; i < numbers.Length; i++)
+                    {
+                        int secondNumber = numbers[i];
+
+                        if (secondNumber != number)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            countOfEqualElements++;
+                        }
+                    }
+                    if (countOfEqualElements > biggestCountOfEqualElements)
+                    {
+                        biggestCountOfEqualElements = countOfEqualElements;
+                        equalElementsValue = numbers[j];
+                    }
+                    countOfEqualElements = 0;
+                }
+                for (int t = 0; t <= biggestCountOfEqualElements; t++)
+                {
+                    Console.Write(equalElementsValue + " ");
+                }
+            }
+        }
+    }
+}
