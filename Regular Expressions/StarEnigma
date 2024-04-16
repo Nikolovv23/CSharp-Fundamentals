@@ -1,0 +1,110 @@
+// The war is at its peak, but you, young Padawan, can turn the tides with your programming skills. You are tasked to create a program to decrypt the messages of The Order
+// and prevent the death of hundreds of lives. 
+// You will receive several messages, which are encrypted, using the legendary star enigma. You should decrypt the messages, following these rules:
+// To properly decrypt a message, you should count all the letters [s, t, a, r] – case insensitive and remove the count from the current 
+// ASCII value of each symbol of the encrypted message.
+// After decryption:
+// •	Each message should have a planet name, population, attack type('A' as an attack or 'D' as destruction), and soldier count.
+// •	The planet name starts after '@' and contains only letters from the Latin alphabet.
+// •	The planet population starts after ':' and is an Integer.
+// •	The attack type may be "A"(attack) or "D"(destruction) and must be surrounded by "!"(exclamation mark).
+// •	The soldier count starts after "->" and should be an Integer.
+// The order in the message should be: planet name -> planet population -> attack type -> soldier count.
+// Each part can be separated from the others by any character except '@', '-', '!', ':' and '>'.
+
+//         Input:
+// 2
+// STCDoghudd4=63333$D$0A53333
+// EHfsytsnhf?8555&I&2C9555SR
+//         Output:
+// Attacked planets: 1
+// ->Alderaa
+// Destroyed planets: 1
+// ->Cantonica
+
+
+
+namespace StarEnigma
+{
+    internal class Program
+    {
+        class Message
+        {
+            public string PlanetName { get; set; }
+            public ulong Population { get; set; }
+            public string AttackType { get; set; }
+            public ulong SoldierCount{ get; set; }
+
+            public Message (string planetName, ulong population, string attackType, ulong soldierCount)
+            {
+                PlanetName = planetName;
+                Population = population;
+                AttackType = attackType;       
+                SoldierCount = soldierCount;
+            }
+        }
+        static void Main(string[] args)
+        {
+            int messagesCount = int.Parse(Console.ReadLine());
+
+            string starPattern = @"[SsTtAaRr]";
+            string messagePattern = @"@(?<planet>[A-Z][a-z]+)[^\@\-\!\:\>]*:(?<population>\d+)[^\@\-\!\:\>]*(?<attackType>!A!|!D!)[^\@\-\!\:\>]*->(?<soldierCount>\d+)";
+
+            int attackedPlanets = 0;
+            int destroyedPlanets = 0;
+
+            List <Message> attackedPlanet = new List <Message> ();
+            List <Message> destroyedPlanet = new List <Message> ();
+            for (int i = 0; i < messagesCount; i++)
+            {
+                string encryptMessage = Console.ReadLine();
+                int decryptionKey = Regex.Matches(encryptMessage, starPattern).Count;
+
+                StringBuilder messageBuilder = new StringBuilder();
+                for (int j = 0; j < encryptMessage.Length; j++)
+                {
+                    char current = (char)(encryptMessage[j] - decryptionKey);
+                    messageBuilder.Append(current);
+                }
+                foreach(Match elements in Regex.Matches(messageBuilder.ToString(),messagePattern))
+                {
+                    string planetName = elements.Groups["planet"].Value;
+                    ulong population = ulong.Parse(elements.Groups["population"].Value);
+                    string attackType = elements.Groups["attackType"].Value;
+                    
+                    ulong soldierCount = ulong.Parse(elements.Groups["soldierCount"].Value);
+                    Message message = new Message( planetName,  population,  attackType,  soldierCount);
+                    if (attackType == "!A!")
+                    {
+                        attackedPlanets++;
+                        attackedPlanet.Add(message);
+                    }
+                    else
+                    {
+                        destroyedPlanets++;
+                        destroyedPlanet.Add(message);
+                    }
+                }
+            }
+            Console.WriteLine($"Attacked planets: {attackedPlanets}");
+            if ( attackedPlanets > 0 )
+            {
+                var orderedPlanets = attackedPlanet.OrderBy(a => a.PlanetName).ToList();
+                foreach (Message elements in orderedPlanets)
+                {
+                    Console.WriteLine($"-> {elements.PlanetName}");
+                } 
+            }
+            Console.WriteLine($"Destroyed planets: {destroyedPlanets}");
+            if (destroyedPlanets > 0)
+            {
+                var orderedPlanets = destroyedPlanet.OrderBy(a => a.PlanetName).ToList();
+
+                foreach (Message elements in orderedPlanets)
+                {
+                    Console.WriteLine($"-> {elements.PlanetName}");
+                }
+            }
+        }
+    }
+}
