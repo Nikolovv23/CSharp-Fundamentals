@@ -1,0 +1,34 @@
+// Create a program that reads user names on a single line (joined by ", ") and prints all valid usernames. 
+// A valid username
+// •	has length between 3 and 16 characters
+// •	contains only letters, numbers, hyphens and underscores
+// Input: sh, too_long_username, !lleg@l ch@rs, jeffbutt
+
+
+namespace ValidUsernames
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] userNames = Console.ReadLine().Split(", ").ToArray();
+            foreach (string name in userNames)
+            {
+                int charCount = name.Length;
+
+                if (charCount < 3 || charCount > 16 ) 
+                {
+                    continue;
+                }
+                if (IsValidUsername(name))
+                {
+                    Console.WriteLine(name);
+                }
+            }
+        }
+        private static bool IsValidUsername(string username)
+        {
+            return username.All(ch => char.IsLetterOrDigit(ch) || ch == '-' || ch == '_');
+        }
+    }
+}
