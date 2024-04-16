@@ -1,0 +1,35 @@
+// Create a method that prints out the smallest of three integer numbers.
+
+namespace SmallestOfThreeNumbers
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            double a = double.Parse(Console.ReadLine());
+            double b = double.Parse(Console.ReadLine());
+            double c = double.Parse(Console.ReadLine());
+
+            SmallestNumber(a, b, c);
+        }
+        static void SmallestNumber(double a, double b, double c)
+        {
+            double smallestNumber = 0;
+
+            if (a <= b && a <= c)
+            {
+                smallestNumber = a;
+            }
+            else if (b <= a && b <= c)
+            {
+                smallestNumber = b;
+            }
+            else
+            {
+                smallestNumber = c;
+            }
+
+            Console.WriteLine(smallestNumber);
+        }
+    }
+}
