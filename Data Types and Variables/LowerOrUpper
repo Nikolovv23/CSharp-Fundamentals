@@ -1,0 +1,22 @@
+// Create a program that prints whether a given character is upper-case or lower case.
+
+using System;
+namespace LowerOrUpper
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+                char first = char.Parse(Console.ReadLine());
+                bool a = char.IsUpper(first);
+                if (a == true)
+                {
+                    Console.WriteLine("upper-case");
+                }
+                else
+                {
+                    Console.WriteLine("lower-case");
+                }
+        }
+    }
+}
