@@ -1,0 +1,21 @@
+// Read an array of real numbers (space separated), round them in "away from 0" style and print the output as in the examples:
+
+
+namespace RoundingNumbers
+{
+    class P03_RoundingNumbers
+    {
+        static void Main(string[] args)
+        {
+            double[] nums = Console.ReadLine()
+                                   .Split()
+                                   .Select(double.Parse)
+                                   .ToArray();
+
+            foreach (double num in nums)
+            {
+                Console.WriteLine($"{num} => {Math.Round(num, MidpointRounding.AwayFromZero)}");
+            }
+        }
+    }
+}
