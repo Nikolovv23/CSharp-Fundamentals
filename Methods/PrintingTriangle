@@ -1,0 +1,47 @@
+// Create a method for printing triangles as shown below:
+
+// Input : 3
+
+// Output: 1
+//         1 2
+//         1 2 3
+//         1 2
+//         1
+
+
+namespace PrintingTriangle
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            Triangle(n);
+            Triangle2(n);
+        }
+        static void Triangle (int n)
+        {
+            for (int col  = 1; col <= n;col++)
+            {
+                for (int row = 1; row <= col; row++)
+
+                {
+                    Console.Write(row + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+        static void Triangle2  (int n)
+        {
+            for (int col = n - 1; col >= 1; col--)
+            {
+                for (int row = 1; row <= col; row++)
+
+                {
+                    Console.Write(row + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
