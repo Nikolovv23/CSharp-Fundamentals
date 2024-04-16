@@ -1,0 +1,68 @@
+// Create a program that keeps track of the guests that are going to a house party. On the first line, of input you are going to receive the number of commands that will follow.
+// On the next lines, you are going to receive some of the following:  "{name} is going!"
+// •	You have to add the person, if they are not on the guestlist already.
+// •	If the person is on the list print the following to the console: "{name} is already in the list!"
+// "{name} is not going!"
+// •	You have to remove the person, if they are on the list. 
+// •	If not, print out: "{name} is not in the list!"
+// Finally, print all of the guests, each on a new line.
+
+//     Input:
+// 4
+// Allie is going!
+// George is going!
+// John is not going!
+// George is not going!
+ 
+//     Output:
+// John is not in the list!
+// Allie
+
+
+
+namespace HouseParty
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int repetitions = int.Parse(Console.ReadLine());
+            List<string> names = new List<string>();
+
+            for (int i = 0; i < repetitions; i++)
+            {
+                List<string> numbers = Console.ReadLine()
+               .Split(" ")
+               .ToList();
+
+                if (numbers[2] == "going!")
+                {
+                    if (names.Contains(numbers[0]))
+                    {
+                        Console.WriteLine(numbers[0] + " " + "is already in the list!");
+                    }
+                    else
+                    {
+                        names.Add(numbers[0]);
+                    }
+                }
+
+                else
+                {
+                    if (names.Contains(numbers[0]))
+                    {
+                        names.Remove(numbers[0]);
+                    }
+                    else
+                    {
+                        Console.WriteLine(numbers[0] + " " + "is not in the list!");
+                    }
+                }
+            }
+            foreach (string name in names)
+            {
+                Console.WriteLine(name);
+            }
+        }
+    }
+}
