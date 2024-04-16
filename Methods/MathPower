@@ -1,0 +1,25 @@
+// Create a method, which receives two numbers as parameters:
+// •	The first number – the base
+// •	The second number – the power
+// The method should return the base raised to the given power.
+
+
+namespace MathPower
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+          double a = double.Parse(Console.ReadLine());
+          double givenPower = double.Parse(Console.ReadLine());
+            
+          Console.WriteLine(RaisedBase(a, givenPower));
+        }
+
+        static double RaisedBase(double a , double power)
+        {
+            double result = Math.Pow(a,power);
+            return result;
+        }
+    }
+}
