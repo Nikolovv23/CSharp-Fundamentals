@@ -1,0 +1,97 @@
+// You will receive three lines from the console:
+// •	A count of people who are going on vacation.
+// •	Type of the group (Students, Business or Regular).
+// •	The day of the week which the group will stay on (Friday, Saturday or Sunday).
+// Based on the given information calculate how much the group will pay for the entire vacation. 
+// The price for a single person is as follows:
+
+// 	        Friday		Saturday		Sunday
+// Students	  8.45		  9.80			10.46
+// Business	  10.90		  15.60			  16
+// Regular		 15		   	20			  22.50
+
+// There are also discounts based on some conditions:
+// •	For Students – if the group is 30 or more people, you should reduce the total price by 15%.
+// •	For Business – if the group is 100 or more people, 10 of the people stay for free.
+// •	For Regular – if the group is between 10 and 20  people (both inclusively), reduce the total price by 5%.
+// 
+// Note: You should reduce the prices in that EXACT order!
+// As an output print the final price which the group is going to pay in the format: 
+// "Total price: {price}"
+// The price should be formatted to the second decimal point.
+
+// 	Examples:
+// 	     input: 30
+// 				Students
+// 				Sunday
+// 		 output: Total price: 266.73
+
+
+
+using System;
+namespace Vacation
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int countOfPeople = int.Parse(Console.ReadLine());
+            string typeOfTheGroup = Console.ReadLine();
+            string dayOfWeek = Console.ReadLine();
+            decimal priceForOnePerson = 0;
+            
+
+            if (dayOfWeek == "Friday")
+            {
+                switch (typeOfTheGroup)
+                {
+                    case "Students":
+                        priceForOnePerson = 8.45M; break;
+                    case "Business":
+                        priceForOnePerson = 10.90M; break;
+                    case "Regular":
+                        priceForOnePerson = 15M; break;
+                }
+            }
+            else if (dayOfWeek == "Saturday")
+            {
+                switch (typeOfTheGroup)
+                {
+                    case "Students":
+                        priceForOnePerson = 9.80M; break;
+                    case "Business":
+                        priceForOnePerson = 15.60M; break;
+                    case "Regular":
+                        priceForOnePerson = 20M; break;
+                }
+            } 
+            else if (dayOfWeek == "Sunday")
+            {
+                switch (typeOfTheGroup)
+                {
+                    case "Students":
+                        priceForOnePerson = 10.46M; break;
+                    case "Business":
+                        priceForOnePerson = 16M; break;
+                    case "Regular":
+                        priceForOnePerson = 22.50M; break;
+                }
+            }
+           decimal priceForGroup = priceForOnePerson * countOfPeople;
+            if (typeOfTheGroup == "Students" && countOfPeople >= 30)
+            {
+                priceForGroup *= 0.85M;
+            }
+            else if (typeOfTheGroup == "Business" && countOfPeople >= 100)
+            {
+                priceForGroup -= priceForOnePerson * 10;
+            }
+            else if (typeOfTheGroup == "Regular" && countOfPeople >= 10 &&  countOfPeople <= 20)
+            {
+                priceForGroup *= 0.95M;
+            }
+            Console.WriteLine($"Total price: {priceForGroup:f2}");
+        }                                                                                                         
+    }
+}
+                                             
