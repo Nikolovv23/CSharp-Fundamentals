@@ -1,0 +1,54 @@
+// You will be given a sequence of strings, each on a new line.Every odd line on the console is representing a resource (e.g. Gold, Silver, Copper and so on) and every even - quantity. Your task is to collect the resources and print them each on a new line.
+// Print the resources and their quantities in the following format:
+// "{resource} –> {quantity}"
+// The quantities will be in the range [1… 2 000000000].
+
+//    Input:
+// Gold
+// 155
+// Silver
+// 10
+// Copper
+// 17
+// stop
+//   Output:
+// Gold -> 155
+// Silver -> 10
+// Copper -> 17
+
+
+namespace AMinerTask
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string input = default;
+    
+            var resourcesAndQuantities = new Dictionary<string, int>();
+            var elements = new List <string> ();
+            while((input = Console.ReadLine()) != "stop") 
+            {
+                 elements.Add (input);
+            }
+            for(int i = 0; i < elements.Count; i += 2)
+            {
+                string resource = elements[i];
+                int quantity = int.Parse(elements[i+1]);
+
+                if (!resourcesAndQuantities.ContainsKey(resource))
+                {
+                    resourcesAndQuantities.Add(resource, quantity);
+                }
+                else
+                {
+                    resourcesAndQuantities[resource] += quantity;
+                }
+            }
+            foreach (KeyValuePair<string,int> kvp in resourcesAndQuantities)
+            {
+                Console.WriteLine($"{kvp.Key} -> {kvp.Value}");
+            }
+        }   
+    }
+}
