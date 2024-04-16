@@ -1,0 +1,101 @@
+// Your task is to create a Vehicle catalog, which contains only Trucks and Cars.
+// Define a class Truck with the following properties: Brand, Model, and Weight.
+// Define a class Car with the following properties: Brand, Model, and Horse Power.
+// Define a class Catalog with the following properties: Collections of Trucks and Cars.
+// You must read the input, until you receive the "end" command. It will be in following format: "{type}/{brand}/{model}/{horse power / weight}"
+// In the end, you have to print all of the vehicles ordered alphabetical by brand, in the following format:
+// "Cars:
+// { Brand}: { Model} - { Horse Power}hp
+// Trucks:
+// { Brand}: { Model} - { Weight}kg"
+
+//     Input:
+// Car/Audi/A3/110
+// Car/Maserati/Levante/350
+// Truck/Mercedes/Actros/9019
+// Car/Porsche/Panamera/375
+// end
+
+//     Output:
+// Cars:
+// Audi: A3 - 110hp
+// Maserati: Levante - 350hp
+// Porsche: Panamera - 375hp
+// Trucks:
+// Mercedes: Actros - 9019kg
+
+
+
+namespace VehicleCatalogue
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string command = default;
+            List<Truck> trucks = new List<Truck>();
+            List<Car> cars = new List<Car>();
+            bool IsThereTrucks = false;
+            bool IsThereCars = false;
+
+            while ((command = Console.ReadLine()) != "end")
+            {
+                string[] item = command.Split('/').ToArray();
+                string kind = item[0];
+                string brand = item[1];
+                string model = item[2];
+                int horsePowerOrWeigth = int.Parse(item[3]);
+
+                if (kind == "Car")
+                {
+                    IsThereCars = true;
+                    Car car = new Car();
+                    car.Brand = brand;
+                    car.Model = model;
+                    car.HorsePower = horsePowerOrWeigth;
+                    cars.Add(car);
+                }
+                else // kind == "Truck"
+                {
+                    IsThereTrucks = true;
+                    Truck truck = new Truck();
+                    truck.Brand = brand;
+                    truck.Model = model;
+                    truck.Weight = horsePowerOrWeigth;
+                    trucks.Add(truck);
+                }
+            }
+            List<Car> sortedCars = cars.OrderBy(cars => cars.Brand).ToList();
+            List<Truck> sortedTruck = trucks.OrderBy(trucks => trucks.Brand).ToList();
+
+            if (IsThereCars)
+            { 
+                Console.WriteLine("Cars:");
+                foreach (Car car in sortedCars)
+                {
+                    Console.WriteLine($"{car.Brand}: {car.Model} - {car.HorsePower}hp");
+                }
+            }
+            if (IsThereTrucks)
+            {
+                Console.WriteLine("Trucks:");
+                foreach (Truck truck in sortedTruck)
+                {
+                    Console.WriteLine($"{truck.Brand}: {truck.Model} - {truck.Weight}kg");
+                }
+            }
+        }
+        public class Truck
+        {
+            public string Brand { get; set; }
+            public string Model { get; set; }
+            public int Weight { get; set; }
+        }
+        public class Car
+        {
+            public string Brand { get; set; }
+            public string Model { get; set; }
+            public int HorsePower { get; set; }
+        }
+    }
+}
