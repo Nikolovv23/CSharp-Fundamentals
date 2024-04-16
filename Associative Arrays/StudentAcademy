@@ -1,0 +1,69 @@
+// Create a program that keeps the information about students and their grades. 
+// You will receive n pair of rows. First, you will receive the student's name, after that, you will receive their grade. Check if the student already exists and if not, add him. Keep track of all grades for each student.
+// When you finish reading the data, keep the students with an average grade higher than or equal to 4.50.
+// Print the students and their average grade in the following format:
+// "{name} –> {averageGrade}"
+// Format the average grade to the 2nd decimal place.
+
+//     Input:
+// 5
+// John
+// 5.5
+// John
+// 4.5
+// Alice
+// 6
+// Alice
+// 3
+// George
+// 5
+//     Output:
+// John -> 5.00
+// Alice -> 4.50
+// George -> 5.00
+
+
+namespace StudentAcademy
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int iterations = int.Parse(Console.ReadLine());
+            Dictionary<string, Student> students = new Dictionary<string, Student>();
+
+            for (int i = 0; i < iterations; i++)
+            {
+                string name = Console.ReadLine();
+                decimal grade = decimal.Parse(Console.ReadLine());
+
+                if (!students.ContainsKey(name))
+                {
+                    Student student = new Student(name);
+                    students.Add(name,student); 
+                }
+                students[name].StudentGrades.Add(grade);
+            }
+
+            var filteredStudents = students.Where(s => s.Value.StudentGrades.Average() >= 4.50m);
+            foreach (KeyValuePair<string, Student> kvp in filteredStudents)
+            {
+                Console.WriteLine(kvp.Value);
+            }
+        }
+    }
+   class Student
+   {
+        public string Name;
+        public List<decimal> StudentGrades;
+        public Student(string name)
+        {
+            Name = name;
+            StudentGrades = new List<decimal>(); 
+        }
+        public override string ToString()
+        {
+           return $"{Name} -> {StudentGrades.Average():f2}";
+        }
+    }
+}
