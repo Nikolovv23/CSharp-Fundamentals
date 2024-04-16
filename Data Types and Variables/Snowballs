@@ -1,0 +1,52 @@
+// You will receive N – an integer, the number of snowballs being made by Tony and Andi.
+// For each snowball you will receive 3 input lines:
+// •	On the first line, you will get the snowballSnow – an integer.
+// •	On the second line you will get the snowballTime – an integer.
+// •	On the third line, you will get the snowballQuality – an integer.
+// For each snowball you must calculate its snowballValue by the following formula:
+// (snowballSnow / snowballTime) ^ snowballQuality
+// In the end, you must print the highest calculated snowballValue.
+// Input
+// •	On the first input line, you will receive N – the number of snowballs.
+// •	On the next N * 3 input lines, you will be receiving data about snowballs.
+// Output
+// •	As output, you must print the highest calculated snowballValue, by the formula, specified above. 
+// •	The output format is: 
+// { snowballSnow} : { snowballTime} = { snowballValue} ({ snowballQuality})
+//  
+// Example: input: 2     output: 10 : 2 = 125(3)
+//                  10 
+//                  2
+//                  3
+//                  5
+//                  5
+
+
+using System;
+namespace Snowballs
+{
+   internal class Program
+   {
+     static void Main(string[] args)
+     {
+            int numberOfSnowballs = int.Parse(Console.ReadLine());
+            BigInteger bestSnowballValue = 0;
+            string result = "";
+          
+       for (int i = 0; i < numberOfSnowballs; i++)
+       {
+           int snowballSnow = int.Parse(Console.ReadLine());
+           int snowballTime = int.Parse(Console.ReadLine());
+           int snowballQuality = int.Parse(Console.ReadLine());
+           BigInteger snowballValue = BigInteger.Pow(snowballSnow/snowballTime,snowballQuality);
+
+           if (bestSnowballValue < snowballValue)
+           {
+           bestSnowballValue = snowballValue;
+           result = ($"{snowballSnow} : {snowballTime} = {bestSnowballValue} ({snowballQuality})");
+           }
+       }
+            Console.WriteLine(result);
+     } 
+   }
+}
