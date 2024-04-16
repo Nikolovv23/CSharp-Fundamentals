@@ -1,0 +1,52 @@
+// Create a program that multiplies the sum of all even digits of a number by the sum of all odd digits of the same number:
+// •	Create a method called GetMultipleOfEvenAndOdds()
+// •	Create a method GetSumOfEvenDigits()
+// •	Create GetSumOfOddDigits()
+// 
+// Input: -12345  OutPut: 54  Comment***: Evens: 2 4
+//                                        Odds: 1 3 5
+//                                        Even sum: 6
+//                                        Odd sum: 9
+//                                        6 * 9 = 54
+
+
+namespace MultiplyEvensByOdds
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+           int number =Math.Abs(int.Parse( Console.ReadLine()));
+           string numbers = number.ToString();
+
+           int result = GetSumOfOddDigits(numbers) * GetSumOfEvenDigits(numbers) ;
+           Console.WriteLine(result);
+        }
+        static int GetSumOfEvenDigits(string numbers)
+        {
+            int sumOfEvens = 0;
+            foreach (char digits in numbers)
+            {
+                int digit = int.Parse(digits.ToString());
+                if (digit % 2 == 0)
+                {
+                    sumOfEvens += digit;
+                }
+            }
+            return sumOfEvens;
+        }
+        static int GetSumOfOddDigits(string numbers)
+        {
+            int sumOfOdds = 0;
+            foreach (char digits in numbers)
+            {
+                int digit = int.Parse(digits.ToString());
+                if (digit % 2 != 0)
+                {
+                    sumOfOdds += digit;
+                }
+            }
+            return sumOfOdds;
+        }
+    }
+}
