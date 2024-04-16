@@ -1,0 +1,38 @@
+// Read a number n and n lines of products. Print a numbered list of all the products ordered by name.
+//     Input:
+// 4
+// Potatoes
+// Tomatoes
+// Onions
+// Apples
+//     Output:
+// 1.Apples
+// 2.Onions
+// 3.Potatoes
+// 4.Tomatoes
+
+
+namespace ListOfProducts
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+           int count = int.Parse(Console.ReadLine());
+            string[] products = new string[count];
+            for (int i = 0; i < count; i++)
+            {
+                string product = Console.ReadLine();
+                products[i] = product;
+            } 
+            Array.Sort(products);
+            for (int i = 0;i < products.Length;i++)
+            {
+                int number = i + 1;
+                products[i] = number.ToString() + "." + products[i];
+                number = 0;
+                Console.WriteLine(products[i]);
+            }
+        }
+    }
+}
