@@ -1,0 +1,72 @@
+ 
+// Write a program that reads a sequence of strings from the console. Encrypt every string by summing:
+// •	The code of each vowel multiplied by the string length
+// •	The code of each consonant divided by the string length
+// Sort the number sequence in ascending order and print it in the console.
+// On the first line, you will always receive the number of strings you have to read.
+
+// Input: 4         Output: 1032        Comments***: Peter = 1071
+//        Peter             1071                     Maria = 1532
+//        Maria             1168                     Katya = 1032
+//        Katya             1532                     Todor = 1168
+//        Todor
+
+
+namespace EncryptSortAndPrintArray
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+             int number = int.Parse(Console.ReadLine());
+             bool isVowel = false;
+             int vowelCount = 0;
+             int consonantCount = 0;
+             int sum = 0;
+             int[] arr1 = new int[number];
+
+            for (int t = 0; t < number; t++)
+            {
+                string name = Console.ReadLine();
+
+                 foreach (char c in name) 
+                 {
+                    char letter = c;
+                    switch (letter)
+                    {
+                        case 'a': isVowel = true; break;
+                        case 'e': isVowel = true; break;
+                        case 'i': isVowel = true; break;
+                        case 'o': isVowel = true; break;
+                        case 'u': isVowel = true; break;
+                        case 'A': isVowel = true; break;
+                        case 'E': isVowel = true; break;
+                        case 'I': isVowel = true; break;
+                        case 'O': isVowel = true; break;
+                        case 'U': isVowel = true; break;
+                    }
+                    if (isVowel)
+                    {
+                        vowelCount += letter * name.Length;
+                    }
+                    else
+                    {
+                        consonantCount += letter / name.Length;
+                    }
+                     isVowel = false;
+                 }
+                sum = consonantCount + vowelCount;
+                arr1[t] = sum;
+                sum = 0;
+                consonantCount = 0;
+                vowelCount = 0;
+            }
+
+            Array.Sort(arr1);
+            for (int i = 0; i < arr1.Length; i++)
+            {
+                Console.WriteLine(string.Join("",arr1[i]));
+            }
+        }
+    }
+}
