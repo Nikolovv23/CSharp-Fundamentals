@@ -1,0 +1,69 @@
+// Create a program to calculate the total cost of different types of furniture. You will be given some lines of input, until you receive the line "Purchase". 
+// For the line to be valid it should be in the following format:
+// ">>{furniture name}<<{price}!{quantity}"
+// The price can be a floating-point number or a whole number. Store the names of the furniture and the total price. 
+// At the end, print each bought furniture on a separate line in the format:
+// "Bought furniture:
+// { 1st name}
+// { 2nd name}
+// …"
+// And on the last line, print the following: "Total money spend: {spend money}", formatted to the second decimal point.
+
+// Input: >>Sofa<<312.23!3
+//        >> TV << 300!5
+//        > Invalid << !5
+//        Purchase
+// Output: Bought furniture:
+//         Sofa
+//         TV
+//         Total money spend: 2436.69
+
+
+namespace Furniture
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Furniture> furnitures = new List<Furniture>();
+            string input = default;
+            string pattern = @">>(?<kind>[A-Za-z]+)<<(?<price>\d+\.\d+|\d+)!(?<count>\d+)";
+
+            while ((input = Console.ReadLine()) != "Purchase")
+            {
+                foreach (Match match in Regex.Matches(input, pattern))
+                {
+                    Furniture furniture = new Furniture();
+                    furniture.Name = match.Groups[1].Value;
+                    furniture.Price = decimal.Parse(match.Groups[2].Value);
+                    furniture.Count = int.Parse(match.Groups[3].Value);
+
+                    furnitures.Add(furniture);
+                }
+            }
+
+            decimal totalCost = 0;
+            Console.WriteLine("Bought furniture:");
+
+            foreach (Furniture furniture in furnitures)
+            {
+                Console.WriteLine(furniture.Name);
+                totalCost += furniture.Total();
+            }
+            Console.WriteLine($"Total money spend: {totalCost:f2}");
+        }
+    }
+    class Furniture
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int Count { get; set; }
+
+        public decimal Total()
+        {
+            return Price * Count;
+        }
+    }
+}
+
+
