@@ -1,0 +1,58 @@
+
+// Create a program that prints on a new line the next n odd numbers (starting from 1). On the last row print the sum of all n odd numbers.
+
+// Input
+// A single number n is read from the console, indicating how many odd numbers need to be printed.
+// Output
+// Print the next n odd numbers, starting from 1, separated by new lines.On the last line, print the sum of these numbers.
+// Constraints
+// •	n will be in the interval [1…100]
+
+// Examples:
+//      input: 5
+//     output: 1
+//             3
+//             5
+//             7
+//             9
+//             Sum: 25
+
+
+
+using System;
+namespace SumOfOddNumbers
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            var n = int.Parse(Console.ReadLine());
+            var sum = 0;
+            bool isItOdd = true;
+            for (int i = 0; i < n; )
+            {
+                
+                for (int j = 1; j < 10000; j++)
+                {   
+                    if (j % 2 == 0)
+                    {
+                        isItOdd = false;
+                        if (i == n)
+                        { break; }
+                    }
+                    else if (isItOdd)
+                    {
+                        Console.WriteLine(j);
+                        if (i == n)
+                        { break; }
+                        sum += j;
+                        i++;
+                    }
+                    isItOdd = true;
+                }
+            }
+            Console.WriteLine($"Sum: {sum}");
+        }
+    }
+}
+
