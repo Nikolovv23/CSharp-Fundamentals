@@ -1,0 +1,40 @@
+// Write a method that receives two numbers and an operator, calculates the result and returns it. You will be given three lines of input.
+// The first will be the first number, the second one will be the operator and the last one will be the second number.
+// The possible operators are: /, *, +and -.
+
+// Input:
+// 5
+// *
+// 5
+ 
+
+
+namespace MathOperations
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            double a = double.Parse(Console.ReadLine());
+            char operators = char.Parse(Console.ReadLine());
+            double b = double.Parse(Console.ReadLine());
+            Console.WriteLine(Calculate(a, operators, b));
+        }
+
+        static double Calculate(double first, char operators, double second)
+        {
+            double result = 0;
+            switch (operators)
+            {
+                case '/': result = first/second; break;
+                case '*': result = second*first; break;
+                case '+': result = first+second;  break;
+                case '-': result = first-second; break;
+            }
+            return result;
+        }
+    }
+}
+
+
+
